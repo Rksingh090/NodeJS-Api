@@ -1,0 +1,128 @@
+### get all users
+GET http://localhost:5000/user/ HTTP/1.1
+
+
+### Register
+POST http://localhost:5000/user/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Khushbu",
+    "mobileNo": 7040768742,
+    "password": "khushbu123",
+    "passwordCheck": "khushbu123",
+    "role": "Customer"
+}
+
+
+### Login
+POST http://localhost:5000/user/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "mobileNo": 70407687,
+    "password": "sunny123"
+}
+
+
+### delete user
+DELETE http://localhost:5000/user/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "UserID": "6139d7690928fccfc83778e0"
+}
+
+
+###get all items
+GET http://localhost:5000/item/ HTTP/1.1
+
+
+###create new items (only with role admin)
+POST http://localhost:5000/item/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Any",
+    "Category": "Other",
+    "address": ["24 Sector, East Andheri, Andheri, lat - 13.12, long- 32.25","24 Sector, East Andheri, Andheri, lat - 13.19, long- 32.55" ],
+    "UserID": "6139af89792b55e79901ca2a"
+}
+
+
+###Update by item_ID
+PATCH http://localhost:5000/item/update HTTP/1.1
+Content-Type: application/json
+
+{
+    "itemID": "6139c4950355cd9512fcf986",
+    "updatedData": {
+        "name": "Paracetamol 1",
+        "Category":"medicine"
+    },
+    "UserID": "6139af89792b55e79901ca2a"
+}
+
+###delete by item_ID
+DELETE http://localhost:5000/item/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "itemID": "6139cb614b558fa5ec68e517",
+    "UserID": "6139af89792b55e79901ca2a"
+}
+
+
+
+
+### orders api
+##get all orders
+POST http://localhost:5000/order/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "UserID": "613ad7f3eb8724d3fc1ae9fb",
+    "FilterType": ""
+}
+
+
+###create new order from customer 
+POST http://localhost:5000/order/create HTTP/1.1
+Content-Type: application/json
+
+{
+    "ItemID": "6139c4950355cd9512fcf986",
+    "Quantity": 200,
+    "UserID": "613b05ff661aaae9e2b80a4f"
+}
+
+###assigning order to delevery person
+PATCH http://localhost:5000/order/addDeliveryPerson HTTP/1.1
+Content-Type: application/json
+
+{
+    "AdminID": "613ad7f3eb8724d3fc1ae9fb",
+    "OrderID": "613aec45450c4ea84ce02921",
+    "DeliveryPersonID": "613ad86ecb8da198e60bdeda"
+}
+
+
+###updating status for an order
+PATCH http://localhost:5000/order/updatestatus HTTP/1.1
+Content-Type: application/json
+
+{
+    "OrderID": "613aec45450c4ea84ce02921",
+    "DeliveryPersonID": "613ad86ecb8da198e60bdeda",
+    "status" : "Canceled"
+}
+
+
+###delete order by UserID or Admin
+DELETE http://localhost:5000/order/delete HTTP/1.1
+Content-Type: application/json
+
+{
+    "OrderID": "613ae9ca181d1a2798a14c43",
+    "UserID" : "613ad847cb8da198e60bded6"
+}
